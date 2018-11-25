@@ -1,3 +1,18 @@
-bin/
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+pom.xml.versionsBackup
+/mydb
+/target
+/.settings
+*.classpath
 .project
-target/
+/target/
+/target/
+/bin/
+*.iml
+.idea/
+/.metadata/
