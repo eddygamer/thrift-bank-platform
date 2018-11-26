@@ -15,7 +15,7 @@ public class PingController {
 	
 	@RequestMapping("/ping")
 	public ResponseEntity<String> ping() {
-		return new ResponseEntity<>("Pong...", HttpStatus.OK);
+		return new ResponseEntity<>("Hola Eddy!", HttpStatus.OK);
 
 	}
 }
