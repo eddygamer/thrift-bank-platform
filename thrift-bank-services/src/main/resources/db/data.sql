@@ -1,1 +1,0 @@
-insert into ui_role(name,created_at)  values('manager','2018-11-26 16:32:06');
