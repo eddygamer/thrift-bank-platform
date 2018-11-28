@@ -32,7 +32,31 @@ public class Role implements Serializable {
 
 	@Basic(optional = false)
 	@Column(name = "created_at")
-	private Date created_at;
+	private Date createdAt;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
 
 	public Role() {
 		super();
@@ -42,12 +66,12 @@ public class Role implements Serializable {
 		super();
 		this.id = id;
 		this.name = name;
-		this.created_at = created_at;
+		this.createdAt = created_at;
 	}
 
 	@Override
 	public String toString() {
-		return "Role [id=" + id + ", name=" + name + ", created_at=" + created_at + "]";
+		return "Role [id=" + id + ", name=" + name + ", created_at=" + createdAt + "]";
 	}
 
 }

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.mapstruct.Mapper;
 
-import com.cybord.ti.thrift.dto.user.RoleDto;
+import com.cybord.ti.thrift.dto.RoleDto;
 import com.cybord.ti.thrift.entities.Role;
 
 
@@ -15,5 +15,6 @@ import com.cybord.ti.thrift.entities.Role;
 @Mapper
 public interface RoleMapper {
 	RoleDto getRoleDtoFromEntity(Role entity);
+	Role getRoleEntityFromDto(RoleDto dto);
 	List<RoleDto> getRoleDtosFromEntities(List<Role> entities);
 }
