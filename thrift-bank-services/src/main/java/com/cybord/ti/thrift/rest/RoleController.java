@@ -32,6 +32,12 @@ public class RoleController {
 		return new ResponseEntity<>(service.getAllRoles(), HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "/roles/{roleName}", method = RequestMethod.GET)
+	public ResponseEntity<RoleDto> getRoleByName(@PathVariable(value = "roleName") String roleName)
+			throws ThriftBankServiceException {
+		return new ResponseEntity<>(service.getRoleByName(roleName), HttpStatus.OK);
+	}
+
 	@RequestMapping(value = "/roles", method = RequestMethod.POST)
 	public ResponseEntity<RoleDto> createRole(@Valid @RequestBody RoleDto roleDto) throws ThriftBankServiceException {
 		return new ResponseEntity<>(service.createRole(roleDto), HttpStatus.OK);

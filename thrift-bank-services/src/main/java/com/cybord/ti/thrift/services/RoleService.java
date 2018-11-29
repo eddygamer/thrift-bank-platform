@@ -36,6 +36,16 @@ public class RoleService {
 		return mapper.getRoleDtosFromEntities(repository.findAll());
 	}
 
+	public RoleDto getRoleByName(String name) throws ThriftBankServiceException {
+		Optional<Role> role = repository.findByName(name);
+		if (role.isPresent()) {
+			return mapper.getRoleDtoFromEntity(role.get());
+		} else {
+			throw new ThriftBankServiceException("Role don't exist", String.format("The role %s is not found", name),
+					HttpStatus.CONFLICT.value());
+		}
+	}
+
 	public RoleDto createRole(RoleDto roleDto) throws ThriftBankServiceException {
 		try {
 			dtoValidator.createValidator(roleDto);
@@ -44,7 +54,7 @@ public class RoleService {
 			throw new ThriftBankServiceException("Error creating Role", e.getMessage(), HttpStatus.CONFLICT.value());
 		}
 	}
-	
+
 	public RoleDto updateRole(int id, RoleDto roleDto) throws ThriftBankServiceException {
 		try {
 			dtoValidator.updateValidator(roleDto);
@@ -53,8 +63,8 @@ public class RoleService {
 				role.get().setName(roleDto.getName());
 				return mapper.getRoleDtoFromEntity(repository.save(role.get()));
 			} else {
-				throw new ThriftBankServiceException("Error updating Role",
-						String.format("The id %d is not found", id), HttpStatus.CONFLICT.value());
+				throw new ThriftBankServiceException("Error updating Role", String.format("The id %d is not found", id),
+						HttpStatus.CONFLICT.value());
 			}
 		} catch (DataAccessException e) {
 			throw new ThriftBankServiceException("Error updating Role", e.getMessage(), HttpStatus.CONFLICT.value());
