@@ -1,4 +1,4 @@
-package com.cybord.ti.thrift.service;
+package com.cybord.ti.thrift;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
