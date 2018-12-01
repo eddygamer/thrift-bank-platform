@@ -41,7 +41,7 @@ public abstract class AbstractClient {
 
 	public AbstractClient(String url, String contextPath, int maxRetries, int delay, TimeUnit unit) {
 		this.url = url;
-		this.contextPath ="";
+		this.contextPath =contextPath;
 		setDefaultRetryPolicy(maxRetries, delay, unit);
 	}
 	

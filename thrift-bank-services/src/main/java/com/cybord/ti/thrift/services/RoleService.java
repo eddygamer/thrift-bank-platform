@@ -42,7 +42,7 @@ public class RoleService {
 			return mapper.getRoleDtoFromEntity(role.get());
 		} else {
 			throw new ThriftBankServiceException("Role don't exist", String.format("The role %s is not found", name),
-					HttpStatus.CONFLICT.value());
+					HttpStatus.NOT_FOUND.value());
 		}
 	}
 
