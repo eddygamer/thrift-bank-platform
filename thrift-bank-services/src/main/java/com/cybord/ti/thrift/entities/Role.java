@@ -34,6 +34,14 @@ public class Role implements Serializable {
 	@Column(name = "created_at")
 	private Date createdAt;
 
+	@Basic(optional = false)
+	@Column(name = "created_by")
+	private String createdBy;
+
+	@Basic(optional = false)
+	@Column(name = "last_ts")
+	private Date lastTs;
+
 	public Integer getId() {
 		return id;
 	}
@@ -58,6 +66,22 @@ public class Role implements Serializable {
 		this.createdAt = createdAt;
 	}
 
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public Date getLastTs() {
+		return lastTs;
+	}
+
+	public void setLastTs(Date lastTs) {
+		this.lastTs = lastTs;
+	}
+
 	public Role() {
 		super();
 	}
@@ -71,7 +95,8 @@ public class Role implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Role [id=" + id + ", name=" + name + ", created_at=" + createdAt + "]";
+		return "Role [id=" + id + ", name=" + name + ", createdAt=" + createdAt + ", createdBy=" + createdBy
+				+ ", lastTs=" + lastTs + "]";
 	}
 
 }
