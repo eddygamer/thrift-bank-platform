@@ -18,15 +18,15 @@ public class DtoValidator {
 	}
 
 	public void createValidator(RoleDto o) throws ThriftBankServiceException{
-		if (o.getName() == null||o.getCreatedAt() == null) {
-			throw new ThriftBankServiceException("Field required",String.format("Name and CreatedAt are required."),
+		if (o.getName() == null||o.getCreatedAt() == null||o.getCreatedBy()==null) {
+			throw new ThriftBankServiceException("Field required",String.format("Name , CreatedAt and CreatedBy are required."),
 					HttpStatus.BAD_REQUEST.value());
 		}
 	}
 	
 	public void updateValidator(RoleDto o) throws ThriftBankServiceException{
-		if (o.getName() == null) {
-			throw new ThriftBankServiceException("Field required",String.format("Name is required."),
+		if (o.getName() == null||o.getCreatedBy()==null) {
+			throw new ThriftBankServiceException("Field required",String.format("Name and CreatedBy are required."),
 					HttpStatus.BAD_REQUEST.value());
 		}
 	}

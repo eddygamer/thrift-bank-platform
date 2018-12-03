@@ -17,8 +17,11 @@ public class RoleDto implements Serializable {
 
 	private Integer id;
 	private String name;
+	private String createdBy;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
 	private Date createdAt;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
+	private Date lastTs;
 
 	public RoleDto() {
 		super();
@@ -48,9 +51,26 @@ public class RoleDto implements Serializable {
 		this.createdAt = createdAt;
 	}
 
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public Date getLastTs() {
+		return lastTs;
+	}
+
+	public void setLastTs(Date lastTs) {
+		this.lastTs = lastTs;
+	}
+
 	@Override
 	public String toString() {
-		return "RoleDto [id=" + id + ", name=" + name + ", createdAt=" + createdAt + "]";
+		return "RoleDto [id=" + id + ", name=" + name + ", createdBy=" + createdBy + ", createdAt=" + createdAt
+				+ ", lastTs=" + lastTs + "]";
 	}
 
 }

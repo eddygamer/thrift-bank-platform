@@ -32,15 +32,27 @@ public class RoleController {
 		return new ResponseEntity<>(service.getAllRoles(), HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "/roles/{roleName}", method = RequestMethod.GET)
+	public ResponseEntity<RoleDto> getRoleByName(@PathVariable(value = "roleName") String roleName)
+			throws ThriftBankServiceException {
+		return new ResponseEntity<>(service.getRoleByName(roleName), HttpStatus.OK);
+	}
+
 	@RequestMapping(value = "/roles", method = RequestMethod.POST)
 	public ResponseEntity<RoleDto> createRole(@Valid @RequestBody RoleDto roleDto) throws ThriftBankServiceException {
 		return new ResponseEntity<>(service.createRole(roleDto), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/roles/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<RoleDto> update(@PathVariable(value = "id") Integer id, @Valid @RequestBody RoleDto roleDto)
+	public ResponseEntity<RoleDto> updateRole(@PathVariable(value = "id") Integer id, @Valid @RequestBody RoleDto roleDto)
 			throws ThriftBankServiceException {
 		return new ResponseEntity<>(service.updateRole(id, roleDto), HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "/roles/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<RoleDto> deleteRole(@PathVariable(value = "id") Integer id)
+			throws ThriftBankServiceException {
+		return new ResponseEntity<>(service.deleteRole(id), HttpStatus.OK);
+	}
+	
 }

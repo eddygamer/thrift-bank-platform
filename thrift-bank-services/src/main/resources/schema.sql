@@ -18,6 +18,8 @@ CREATE TABLE thrift_bank_pemex.ui_role (
   id int(11) NOT NULL AUTO_INCREMENT,
   name varchar(50) NOT NULL,
   created_at datetime NOT NULL,
+  last_ts datetime NOT NULL,
+  created_by varchar(50) NOT NULL,
   PRIMARY KEY (id),
   UNIQUE KEY constraint_role_name (name)
   ); 

@@ -1,5 +1,6 @@
 package com.cybord.ti.thrift.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,28 +37,57 @@ public class RoleService {
 		return mapper.getRoleDtosFromEntities(repository.findAll());
 	}
 
+	public RoleDto getRoleByName(String name) throws ThriftBankServiceException {
+		Optional<Role> role = repository.findByName(name);
+		if (role.isPresent()) {
+			return mapper.getRoleDtoFromEntity(role.get());
+		} else {
+			throw new ThriftBankServiceException("Role don't exist", String.format("The role %s is not found", name),
+					HttpStatus.NOT_FOUND.value());
+		}
+	}
+
 	public RoleDto createRole(RoleDto roleDto) throws ThriftBankServiceException {
 		try {
 			dtoValidator.createValidator(roleDto);
-			return mapper.getRoleDtoFromEntity(repository.save(mapper.getRoleEntityFromDto(roleDto)));
+			roleDto.setLastTs(new Date());
+			Role role = repository.save(mapper.getRoleEntityFromDto(roleDto));
+			return mapper.getRoleDtoFromEntity(role);
 		} catch (DataAccessException e) {
 			throw new ThriftBankServiceException("Error creating Role", e.getMessage(), HttpStatus.CONFLICT.value());
 		}
 	}
-	
+
 	public RoleDto updateRole(int id, RoleDto roleDto) throws ThriftBankServiceException {
 		try {
 			dtoValidator.updateValidator(roleDto);
 			Optional<Role> role = repository.findById(id);
 			if (role.isPresent()) {
 				role.get().setName(roleDto.getName());
+				role.get().setCreatedBy(roleDto.getCreatedBy());
+				role.get().setCreatedAt(new Date());
 				return mapper.getRoleDtoFromEntity(repository.save(role.get()));
 			} else {
-				throw new ThriftBankServiceException("Error updating Role",
-						String.format("The id %d is not found", id), HttpStatus.CONFLICT.value());
+				throw new ThriftBankServiceException("Error updating Role", String.format("The id %d is not found", id),
+						HttpStatus.CONFLICT.value());
 			}
 		} catch (DataAccessException e) {
 			throw new ThriftBankServiceException("Error updating Role", e.getMessage(), HttpStatus.CONFLICT.value());
+		}
+	}
+
+	public RoleDto deleteRole(int id) throws ThriftBankServiceException {
+		try {
+			Optional<Role> role = repository.findById(id);
+			if (role.isPresent()) {
+				repository.deleteById(id);
+				return mapper.getRoleDtoFromEntity(role.get());
+			} else {
+				throw new ThriftBankServiceException("Error deleting Role", String.format("The id %d is not found", id),
+						HttpStatus.CONFLICT.value());
+			}
+		} catch (DataAccessException e) {
+			throw new ThriftBankServiceException("Error deleting Role", e.getMessage(), HttpStatus.CONFLICT.value());
 		}
 	}
 
